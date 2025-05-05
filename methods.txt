@@ -1,0 +1,115 @@
+									METHODS PRESENT IN THE GAME 
+
+
+
+__init__(self)
+
+Purpose: Initializes the game scene.
+
+Functionality:
+
+Sets up the basic environment (disables mouse control, configures lighting, and camera positioning).
+
+Loads the skybox (if available) and various 3D models (doll, guard, players).
+
+Orients the players to face the doll.
+
+Creates the finish line visual.
+
+Sets up game logic tasks (state toggling, timer update, winner check, guard chase).
+
+Binds keys for player movement and exits.
+
+load_model(self, path, pos=(0, 0, 0), scale=1)
+
+Purpose: Loads a 3D model from a file.
+
+Functionality:
+
+Checks if the file exists.
+
+Loads the model, re-parents it to the render graph, and sets its position and scale.
+
+Exits the program if the model file is not found.
+
+load_audio(self, path)
+
+Purpose: Loads an audio file if it exists.
+
+Functionality:
+
+Checks for the file’s existence.
+
+Loads and returns the audio clip, or prints a warning if the file is missing.
+
+move_player(self, player, fb=0, lr=0)
+
+Purpose: Moves a player in the scene.
+
+Functionality:
+
+Moves the player forward/backward and left/right based on the input parameters.
+
+Checks the current game state; if it's "red" (i.e., movement is forbidden), the player is immediately eliminated.
+
+eliminate_player(self, player)
+
+Purpose: Eliminates a player when they move during a red light.
+
+Functionality:
+
+Sets the player's status to not alive.
+
+Simulates a falling animation by setting the player's pitch.
+
+Adds the player to the dead_players list for further processing by the guard.
+
+update_game(self, task)
+
+Purpose: Toggles the game state between "red" and "green".
+
+Functionality:
+
+Changes the game state every 3 seconds.
+
+Plays the corresponding audio cue.
+
+Adjusts the doll's orientation to indicate whether it’s a red light (stop) or green light (go).
+
+update_timer(self, task)
+
+Purpose: Updates the overall game timer.
+
+Functionality:
+
+Decreases the total time remaining.
+
+Updates the on-screen timer label.
+
+Ends the game when the timer reaches zero.
+
+check_for_winners(self, task)
+
+Purpose: Monitors if any player has reached the finish line.
+
+Functionality:
+
+Checks each player's position.
+
+Declares a win if a player’s position meets or exceeds the finish line (Y-coordinate).
+
+Ends the game if all players are either eliminated or have won.
+
+guard_chase(self, task)
+
+Purpose: Controls the guard's behavior to chase and pick up eliminated players.
+
+Functionality:
+
+Continuously checks for any dead players.
+
+Moves the guard toward the closest dead player.
+
+When in close proximity, the guard "picks up" the dead player by relocating them aside.
+
+Each method contributes to building the overall game logic and scene management in this Panda3D-based implementation.
